@@ -60,7 +60,7 @@ app.post('/file', upload.single('file'), (req, res) => {
 })
 
 
-const port = process.env.port || 3003
+const port = 3003
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
