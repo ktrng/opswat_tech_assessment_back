@@ -1,14 +1,14 @@
 const express = require('express')
-const axios = require('axios')
 const cors = require('cors')
 const request = require('request')
 const app = express()
+require('dotenv').config()
 
 app.use(express.json())
 app.use(cors())
 
 const url = "https://api.metadefender.com/v4/"
-const header = {"apikey": "e71923092c4c1f8bc318e615d892aa23"}
+const header = {"apikey": process.env.APIKEY}
 
 // GET route to look up files via hash
 app.get('/hash/:hashId', (req, res) => {
@@ -45,7 +45,7 @@ app.post('/file', (req, res) => {
     method: 'POST',
         url: url + 'file',
         headers: {
-            "apikey": "e71923092c4c1f8bc318e615d892aa23"
+            "apikey": process.env.APIKEY
         },
         body: req.body,
         json: true
