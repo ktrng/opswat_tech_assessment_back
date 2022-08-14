@@ -3,6 +3,9 @@ const cors = require('cors')
 const request = require('request')
 const app = express()
 require('dotenv').config()
+const multer = require('multer')
+
+const upload = multer({})
 
 app.use(express.json())
 app.use(cors())
@@ -40,14 +43,15 @@ app.get('/file/:dataId', (req, res) => {
 
 
 // POST route to upload files - unsure if it works tbh
-app.post('/file', (req, res) => {
+app.post('/file', upload.single('file'), (req, res) => {
   request({
     method: 'POST',
         url: url + 'file',
         headers: {
-            "apikey": process.env.APIKEY
+            "apikey": process.env.APIKEY,
+            "Content-Type": "multipart/form-data; boundary=--xx--"
         },
-        body: req.body,
+        body: req.file,
         json: true
     }, function (error, response, body) {
         if (error) throw new Error(error);
