@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(cors())
 
 //****** INSERT API KEY BELOW ******
-// const apikey = {apikey}
+// const apikey = apiKeyGoesHere
 
 const url = "https://api.metadefender.com/v4/"
 const header = {"apikey": process.env.APIKEY || apikey}
