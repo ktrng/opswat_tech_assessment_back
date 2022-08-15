@@ -10,8 +10,11 @@ const upload = multer({})
 app.use(express.json())
 app.use(cors())
 
+//****** INSERT API KEY BELOW ******
+// const apikey = {apikey}
+
 const url = "https://api.metadefender.com/v4/"
-const header = {"apikey": process.env.APIKEY}
+const header = {"apikey": process.env.APIKEY || apikey}
 
 // GET route to look up files via hash
 app.get('/hash/:hashId', (req, res) => {
@@ -48,7 +51,7 @@ app.post('/file', upload.single('file'), (req, res) => {
     method: 'POST',
         url: url + 'file',
         headers: {
-            "apikey": process.env.APIKEY,
+            "apikey": process.env.APIKEY || apikey,
             "Content-Type": "multipart/form-data; boundary=--xx--"
         },
         body: req.file,
